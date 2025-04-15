@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Hewan Langka, Warisan Kita!</title>
+  <style>
+    body {
+      background-color: #00c2e0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 30px;
+      color: white;
+      margin: 0;
+    }
+
+    #intro {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: #00c2e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 10;
+    }
+
+    #intro h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    #startBtn {
+      padding: 12px 30px;
+      background-color: white;
+      color: #00c2e0;
+      border: none;
+      border-radius: 10px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #startBtn:hover {
+      background-color: #d8f5f9;
+    }
+
+    .content-box {
+      margin-top: 20px;
+      background-color: #fff;
+      color: #333;
+      padding: 15px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
+      display: none;
+    }
+
+    img {
+      width: 300px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      display: block;
+      width: 200px;
+      margin: 10px auto;
+      padding: 10px;
+      background-color: #e0e0e0;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      color: #333;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #ccc;
+    }
+
+    iframe {
+      width: 100%;
+      height: 315px;
+      border: none;
+      border-radius: 10px;
+    }
+
+    #main-content {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Intro -->
+  <div id="intro">
+    <h1>Selamat Datang di Web Edukasi!</h1>
+    <button id="startBtn">Mulai</button>
+  </div>
+
+  <!-- Main content -->
+  <div id="main-content">
+    <h1>Hewan Langka, <br>Warisan Kita!</h1>
+    <img src="elang.png" alt="Elang Jawa">
+
+    <button onclick="showContent('cerita')">Siapakah Aku?</button>
+    <button onclick="showContent('tentang')">Dari Mana Asalku?</button>
+    <button onclick="showContent('fakta')">Fakta Elang Jawa!</button>
+
+    <div class="content-box" id="content-box">
+      <div id="content-text"></div>
+    </div>
+  </div>
+
+  <!-- Audio -->
+  <audio id="sound" src="sound.mp3"></audio>
+
+  <script>
+    const sound = document.getElementById("sound");
+
+    document.getElementById("startBtn").addEventListener("click", function () {
+      document.getElementById("intro").style.display = "none";
+      document.getElementById("main-content").style.display = "block";
+      sound.play();
+    });
+
+    function showContent(type) {
+      const contentBox = document.getElementById("content-box");
+      const contentText = document.getElementById("content-text");
+
+      if (type === "fakta") {
+        sound.pause();
+      }
+
+      const content = {
+        cerita: `
+          <p><strong>Akulah Elang Jawa</strong>, burung pemangsa yang gagah dan langka dari Pulau Jawa. Tubuhku besar, dengan bulu cokelat keemasan dan jambul mencolok di kepalaku. Karena penampilanku yang megah, aku menjadi inspirasi lambang negara Indonesia, Garuda Pancasila.</p>
+          <p>Aku hidup di hutan-hutan pegunungan yang sejuk. Makananku adalah tikus, burung kecil, dan kadal. Sayangnya, aku kini terancam punah karena habitatku menyempit dan perburuan liar masih terjadi. Tapi aku dilindungi, agar anak cucuku tetap bisa hidup dan menjadi kebanggaan bangsa.</p>
+          <p><strong>Akulah simbol keperkasaan Indonesia — Elang Jawa.</strong></p>
+        `,
+        tentang: `
+          <p><strong>Aku berasal dari Pulau Jawa</strong>, tepatnya tinggal di hutan-hutan pegunungan seperti di:</p>
+          <ul>
+            <li>Taman Nasional Gunung Halimun Salak (Jawa Barat)</li>
+            <li>Taman Nasional Bromo Tengger Semeru (Jawa Timur)</li>
+            <li>Taman Nasional Meru Betiri & Gunung Gede Pangrango</li>
+          </ul>
+        `,
+        fakta: `<iframe src="https://www.youtube.com/embed/hmNiBqjqKJA?si=QB-HxaOEcrWRRAWA" allowfullscreen></iframe>`
+      };
+
+      contentText.innerHTML = content[type];
+      contentBox.style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
